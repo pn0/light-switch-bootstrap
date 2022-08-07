@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
       tables[i].classList.add('table-dark');
     }
 
+    // invert images in navbar and footer
+    document.querySelectorAll('nav, footer').forEach((element) => {
+        element.querySelectorAll('img').forEach((image) => {
+            image.style.filter = "invert(1)";
+        });
+    });
+
     // set light switch input to true
     if (!lightSwitch.checked) {
       lightSwitch.checked = true;
@@ -72,6 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
         tables[i].classList.remove('table-dark');
       }
     }
+
+    // reset inverted images in navbar and footer
+    document.querySelectorAll('nav, footer').forEach((element) => {
+        element.querySelectorAll('img').forEach((image) => {
+            image.style.filter = "invert(0)";
+        });
+    });
 
     if (lightSwitch.checked) {
       lightSwitch.checked = false;
