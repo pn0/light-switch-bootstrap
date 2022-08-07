@@ -2,11 +2,13 @@
  *  Light Switch @version v0.1.4
  */
 
-(function () {
+document.addEventListener('DOMContentLoaded', () => {
   let lightSwitch = document.getElementById('lightSwitch');
   if (!lightSwitch) {
     return;
   }
+
+  let lightSwitchBody = document.body.classList.contains('bg-light');
 
   /**
    * @function darkmode
@@ -15,6 +17,10 @@
    */
   function darkMode() {
     document.querySelectorAll('.bg-light').forEach((element) => {
+    // skip if body class has no 'bg-light', because with 'bg-light'
+    // page background is set to lightgray and without is white
+      if (element == document.body && lightSwitchBody != true)
+        return;
       element.className = element.className.replace(/-light/g, '-dark');
     });
 
@@ -46,10 +52,12 @@
    */
   function lightMode() {
     document.querySelectorAll('.bg-dark').forEach((element) => {
+      if (element == document.body && lightSwitchBody != true)
+        return;
       element.className = element.className.replace(/-dark/g, '-light');
     });
 
-    document.body.classList.add('bg-light');
+    document.body.classList.remove('bg-dark');
 
     if (document.body.classList.contains('text-light')) {
       document.body.classList.replace('text-light', 'text-dark');
@@ -110,4 +118,4 @@
   }
 
   setup();
-})();
+});
